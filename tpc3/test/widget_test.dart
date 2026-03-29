@@ -27,4 +27,25 @@ void main() {
     expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
   });
+
+  testWidgets('Counter resets test', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(const MyApp());
+
+    // Tap the '+' icon to increment to 1.
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pump();
+    
+    // Check that it incremented successfully.
+    expect(find.text('1'), findsOneWidget);
+
+    // Tap the 'Reset' button.
+    await tester.tap(find.text('Reset'));
+    await tester.pump();
+
+    // Verify that our counter has returned to 0.
+    expect(find.text('0'), findsOneWidget);
+    expect(find.text('1'), findsNothing);
+  });
 }
+
